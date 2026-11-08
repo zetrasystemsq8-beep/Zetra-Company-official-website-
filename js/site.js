@@ -4,10 +4,12 @@
    "" is hidden automatically, so nothing fake ever appears on the site.
    - email:     e.g. "hello@yourdomain.com"
    - whatsapp:  digits only with country code, e.g. "2348012345678"
+   - selar:     your Selar product link, e.g. "https://selar.com/yourproduct"
    - phone:     a normal phone number, e.g. "08012345678"
    - social:    full profile addresses, e.g. "https://x.com/yourhandle"
    ===================================================================== */
 window.ZETRA = {
+  selar: "",
   contact: { email: "zetraorld0@gmail.com", whatsapp: "2348056604409", phone: "08065425732" },
   social: { instagram: "", x: "", linkedin: "", tiktok: "https://www.tiktok.com/@zetra_ecosystem", youtube: "https://www.youtube.com/@zetraworld", github: "" }
 };
@@ -30,6 +32,9 @@ window.ZETRA = {
     var ro = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); ro.unobserve(e.target); } }); }, { threshold: .12 });
     $$(".reveal").forEach(function (el) { ro.observe(el); });
   } else { $$(".reveal").forEach(function (el) { el.classList.add("in"); }); }
+
+  /* Selar buttons: shown only when a Selar link is set above */
+  $$("[data-selar]").forEach(function (a) { if (Z.selar) { a.href = Z.selar; a.hidden = false; } });
 
   /* floating WhatsApp button */
   if (Z.contact.whatsapp) {
