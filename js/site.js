@@ -9,9 +9,9 @@
    - social:    full profile addresses, e.g. "https://x.com/yourhandle"
    ===================================================================== */
 window.ZETRA = {
-  selar: "",
+  selar: "https://selar.com/m33q7533sd",
   contact: { email: "zetraorld0@gmail.com", whatsapp: "2348056604409", phone: "08065425732" },
-  social: { instagram: "", x: "", linkedin: "", tiktok: "https://www.tiktok.com/@zetra_ecosystem", youtube: "https://www.youtube.com/@zetraworld", github: "" }
+  social: { instagram: "", x: "", linkedin: "", tiktok: "https://www.tiktok.com/@zetra_ecosystem", youtube: "https://www.youtube.com/@zetraworld", github: "", whatsappChannel: "https://whatsapp.com/channel/0029VbDeVxSElagl1OWT9X3k" }
 };
 
 (function () {
@@ -36,6 +36,9 @@ window.ZETRA = {
   /* Selar buttons: shown only when a Selar link is set above */
   $$("[data-selar]").forEach(function (a) { if (Z.selar) { a.href = Z.selar; a.hidden = false; } });
 
+  /* WhatsApp channel buttons */
+  $$("[data-wach]").forEach(function (a) { if (Z.social.whatsappChannel) { a.href = Z.social.whatsappChannel; a.hidden = false; } });
+
   /* floating WhatsApp button */
   if (Z.contact.whatsapp) {
     var fab = document.createElement("a"); fab.className = "fab"; fab.href = "https://wa.me/" + Z.contact.whatsapp + "?text=" + encodeURIComponent("Hello Zetra, I would like to ask about "); fab.target = "_blank"; fab.rel = "noopener"; fab.setAttribute("aria-label", "Chat with Zetra on WhatsApp");
@@ -45,7 +48,7 @@ window.ZETRA = {
 
   /* footer year and social links */
   var yr = $("#yr"); if (yr) yr.textContent = new Date().getFullYear();
-  var names = { instagram: "Instagram", x: "X", linkedin: "LinkedIn", tiktok: "TikTok", youtube: "YouTube", github: "GitHub" };
+  var names = { instagram: "Instagram", x: "X", linkedin: "LinkedIn", tiktok: "TikTok", youtube: "YouTube", github: "GitHub", whatsappChannel: "WhatsApp Channel" };
   var live = Object.keys(Z.social).filter(function (k) { return Z.social[k]; });
   if (live.length && $("#social")) {
     live.forEach(function (k) { var li = document.createElement("li"), a = document.createElement("a"); a.href = Z.social[k]; a.textContent = names[k] || k; a.target = "_blank"; a.rel = "noopener"; li.appendChild(a); $("#social").appendChild(li); });
@@ -68,6 +71,7 @@ window.ZETRA = {
         var card = btn.closest("[data-name]"); var n = card.getAttribute("data-name"), c = card.getAttribute("data-cat"), s = card.getAttribute("data-status"), d = card.getAttribute("data-desc");
         $("#dn", dlg).textContent = n; $("#dc", dlg).textContent = c; $("#dd", dlg).textContent = d;
         var st = $("#ds", dlg); st.textContent = s === "live" ? "Live" : "Coming soon"; st.className = "st " + s;
+        var dl = $("#dl", dlg), u = card.getAttribute("data-url"); if (u) { dl.href = u; dl.hidden = false; } else { dl.hidden = true; }
         $("#da", dlg).href = "contact.html?product=" + encodeURIComponent(n);
         dlg.showModal();
       });
@@ -88,6 +92,7 @@ window.ZETRA = {
       if (ch.phone) { var l3 = document.createElement("li"); l3.innerHTML = "<small>Phone</small>"; var a3 = document.createElement("a"); a3.href = "tel:+234" + ch.phone.replace(/^0/, ""); a3.textContent = ch.phone; l3.appendChild(a3); list.appendChild(l3); }
       if (hasE) { var l2 = document.createElement("li"); l2.innerHTML = "<small>Email</small>"; var a2 = document.createElement("a"); a2.href = "mailto:" + ch.email; a2.textContent = ch.email; l2.appendChild(a2); list.appendChild(l2); }
     }
+    if (Z.social.whatsappChannel) { var l4 = document.createElement("li"); l4.innerHTML = "<small>WhatsApp channel</small>"; var a4 = document.createElement("a"); a4.href = Z.social.whatsappChannel; a4.target = "_blank"; a4.rel = "noopener"; a4.textContent = "Join for daily updates"; l4.appendChild(a4); list.appendChild(l4); }
     var q = new URLSearchParams(location.search).get("product");
     if (q) { form.subject.value = "Enquiry about " + q; }
     function data() {

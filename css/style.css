@@ -172,3 +172,5 @@ section{padding:80px 0}.burger{display:block}
 .band .btn+.btn{margin-left:10px}
 @media(max-width:1000px){.learn{grid-template-columns:1fr;gap:36px}.lcov img{max-width:300px}.meta{grid-template-columns:1fr 1fr}.person img{max-width:100%}}
 @media(max-width:640px){.band .btn+.btn{margin:12px 0 0}.meta{grid-template-columns:1fr}}
+
+.cacts{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.cacts .btn{padding:.6em 1.1em;font-size:.9rem}
